@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -31,13 +33,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title, required this.audioFiles})
+  const MyHomePage({Key? key, required this.title, required this.audioFiles})
       : super(key: key);
 
   final String title;
   final List<String> audioFiles;
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -96,9 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Now playing:',
-            ),
+            Text('Now playing:'),
             Text(
               '${widget.audioFiles[_currentIndex]}',
               style: Theme.of(context).textTheme.headline4,
@@ -128,8 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           SizedBox(width: 16),
           FloatingActionButton(
-            onPressed: _stop,
+            onPressed: _next,
             tooltip: 'Next',
+            child: Icon(Icons.queue_play_next),
+          ),
+           SizedBox(width: 16),
+          FloatingActionButton(
+            onPressed: _stop,
+            tooltip: 'Stop',
             child: Icon(Icons.queue_play_next),
           ),
         ]),
